@@ -15,19 +15,16 @@
   <form asp-action="Edit" method="POST" class="mt-6 px-6 flex flex-col gap-2">
     <input type="hidden" asp-for="DepartmentId" />
 
-    <!-- Department Name -->
     <input asp-for="DepartmentName"
       class="w-full border text-base text-black px-4 py-2 placeholder:font-light focus:outline-black transition-all ease-linear duration-300"
       placeholder="Department Name" required />
     <span asp-validation-for="DepartmentName" class="text-red-500"></span>
 
-    <!-- Department Description -->
     <input asp-for="Description"
       class="w-full border text-base text-black px-4 py-2 placeholder:font-light focus:outline-black transition-all ease-linear duration-300"
       placeholder="Department Description" />
     <span asp-validation-for="Description" class="text-red-500"></span>
 
-    <!-- Submit Button -->
     <div class="flex">
       <button type="submit" class="px-4 py-2 bg-black w-full text-white font-medium hover:bg-black/90 shadow-sm">
         Update Department

@@ -40,7 +40,19 @@ namespace EmployeeMgmt.Application.Services
 
     public async Task UpdateEmployeeAsync(Employee employee)
     {
-      await _employeeRepository.UpdateAsync(employee);
+      var existingEmployee = await _employeeRepository.GetByIdAsync(employee.EmployeeId);
+
+      if (existingEmployee == null)
+      {
+        throw new InvalidOperationException("Employee not found.");
+      }
+
+      existingEmployee.Name = employee.Name;
+      existingEmployee.Email = employee.Email;
+      existingEmployee.HireDate = employee.HireDate;
+      existingEmployee.DepartmentId = employee.DepartmentId;
+
+      await _employeeRepository.UpdateAsync(existingEmployee);
     }
 
     public async Task DeleteEmployeeAsync(int employeeId)

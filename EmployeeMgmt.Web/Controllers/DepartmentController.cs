@@ -95,5 +95,20 @@ namespace EmployeeMgmt.Web.Controllers {
       }
       return View(department);
     }
+
+
+    // POST: Department/Delete
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int departmentId)
+    {
+      var department = await _departmentService.GetDepartmentByIdAsync(departmentId);
+      if (department == null)
+      {
+        return NotFound();
+      }
+      await _departmentService.DeleteDepartmentAsync(departmentId);
+      return RedirectToAction(nameof(Index));
+    }
   }
 }

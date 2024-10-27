@@ -24,6 +24,14 @@ namespace EmployeeMgmt.Application.Services
 
     public async Task AddDepartmentAsync(Department department)
     {
+      var existingDepartments = await _departmentRepository.GetAllAsync();
+
+      // Check if a department with the same name already exists
+      if (existingDepartments.Any(d => d.DepartmentName == department.DepartmentName))
+      {
+        throw new InvalidOperationException("Department already exists.");
+      }
+
       await _departmentRepository.AddAsync(department);
     }
 

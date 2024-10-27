@@ -9,11 +9,11 @@ namespace EmployeeMgmt.Domain.Entities
     public string? EmployeeCode { get; set; }
 
     [Required(ErrorMessage = "Name is required")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [Required(ErrorMessage = "Email is required")]
     [EmailAddress(ErrorMessage = "Invalid Email Address")]
-    public string Email { get; set; }  
+    public required string Email { get; set; }
 
     [Required(ErrorMessage = "Department is required")]
     public int DepartmentId { get; set; }

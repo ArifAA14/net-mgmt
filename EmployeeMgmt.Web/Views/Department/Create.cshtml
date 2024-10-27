@@ -1,0 +1,32 @@
+@model EmployeeMgmt.Domain.Entities.Department
+@{
+  ViewData["Title"] = "New Department";
+}
+<div class="w-full h-full flex flex-col ">
+  <div class="flex flex-col gap-2 px-6 py-10 border-b">
+    <h1 class="text-3xl font-serif font-medium">New Department</h1>
+    <p class="font-normal text-md text-neutral-400 font-sans tracking-tight px-1 text-balance">
+      Please fill in the following form carefully to register a new department.
+    </p>
+  </div>
+
+  <form asp-action="Create" method="POST" class="mt-6 px-6 flex flex-col gap-2">
+    <!-- Employee Name -->
+    <input asp-for="DepartmentName"
+      class="w-full border text-base text-black px-4 py-2 placeholder:font-light focus:outline-black transition-all ease-linear duration-300"
+      placeholder="Department Name" required />
+    <span asp-validation-for="DepartmentName" class="text-red-500"></span>
+
+    <input asp-for="Description"
+      class="w-full border text-base text-black px-4 py-2 placeholder:font-light focus:outline-black transition-all ease-linear duration-300"
+      placeholder="Department Description" required />
+    <span asp-validation-for="Description" class="text-red-500"></span>
+
+    <button type="submit" class="px-4 py-2 bg-black w-full text-white font-medium hover:bg-black/90 shadow-sm">
+      Register Employee
+    </button>
+
+
+  </form>
+
+</div>

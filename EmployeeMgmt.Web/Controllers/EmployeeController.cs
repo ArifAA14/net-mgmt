@@ -39,7 +39,6 @@ namespace EmployeeMgmt.Web.Controllers
     {
       if (ModelState.IsValid)
       {
-        // Convert HireDate to UTC before saving
         employee.HireDate = DateTime.SpecifyKind(employee.HireDate, DateTimeKind.Utc);
         await _employeeService.AddEmployeeAsync(employee);
         return RedirectToAction(nameof(Index));

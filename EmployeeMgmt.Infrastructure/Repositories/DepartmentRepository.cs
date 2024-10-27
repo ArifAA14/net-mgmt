@@ -31,7 +31,18 @@ namespace EmployeeMgmt.Infrastructure.Repositories
 
     public async Task UpdateAsync(Department department)
     {
-      _context.Departments.Update(department);
+      // Detach the existing entity if it's already being tracked
+      var trackedEntity = _context.ChangeTracker.Entries<Department>()
+          .FirstOrDefault(e => e.Entity.DepartmentId == department.DepartmentId);
+
+      if (trackedEntity != null)
+      {
+        trackedEntity.State = EntityState.Detached; // Detach the tracked entity
+      }
+
+      // Now attach and update the new entity
+      _context.Departments.Attach(department);
+      _context.Entry(department).State = EntityState.Modified;
       await _context.SaveChangesAsync();
     }
 

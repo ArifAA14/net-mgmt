@@ -58,5 +58,42 @@ namespace EmployeeMgmt.Web.Controllers {
       ViewBag.Department = department;
       return View(employees);
     }
+
+
+    // GET: Department/Edit
+    public async Task<IActionResult> Edit(int departmentId)
+    {
+      var department = await _departmentService.GetDepartmentByIdAsync(departmentId);
+      if (department == null)
+      {
+        return NotFound();
+      }
+      return View(department);
+    }
+
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int departmentId, Department department)
+    {
+      if (departmentId != department.DepartmentId)
+      {
+        return BadRequest();
+      }
+
+      if (ModelState.IsValid)
+      {
+        try
+        {
+          await _departmentService.UpdateDepartmentAsync(department);
+          return RedirectToAction(nameof(Index));
+        }
+        catch (InvalidOperationException ex)
+        {
+          ModelState.AddModelError("DepartmentName", ex.Message);
+        }
+      }
+      return View(department);
+    }
   }
 }

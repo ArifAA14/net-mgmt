@@ -8,5 +8,6 @@ namespace EmployeeMgmt.Application.Services {
     Task AddEmployeeAsync(Employee employee);
     Task UpdateEmployeeAsync(Employee employee);
     Task DeleteEmployeeAsync(int employeeId);
+    Task<IEnumerable<Employee>> GetEmployeesByDepartmentIdAsync(int departmentId);
   }
 }

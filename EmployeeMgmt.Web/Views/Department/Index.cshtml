@@ -24,12 +24,13 @@
           <p class="text-md font-sans font-normal text-neutral-500 tracking-tight">
             <span class="text-neutral-500 font-sans ">@dept.Description</span>
           </p>
-          <p class="text-md font-sans font-normal text-neutral-500 tracking-tight">
-          Employees - <span class="text-black font-sans">@dept.Employees.Count()
-          </span>
-          </p>
+
         </div>
         <div class="flex gap-4">
+          <a href="@Url.Action("ViewEmployees", "Department", new { departmentId = dept.DepartmentId })"
+            class="p-2.5 font-light font-serif border hover:bg-neutral-50 transition-all ease-linear duration-300">
+            View Employees
+          </a>
           <button class=" p-2.5   border hover:bg-neutral-50 transition-all ease-linear duration-300">
             <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

@@ -47,5 +47,11 @@ namespace EmployeeMgmt.Application.Services
     {
       await _employeeRepository.DeleteAsync(employeeId);
     }
+
+    public async Task<IEnumerable<Employee>> GetEmployeesByDepartmentIdAsync(int departmentId)
+    {
+      var employees = await _employeeRepository.GetAllAsync();
+      return employees.Where(e => e.DepartmentId == departmentId);
+    }
   }
 }

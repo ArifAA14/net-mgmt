@@ -6,10 +6,12 @@ namespace EmployeeMgmt.Web.Controllers {
   public class DepartmentController : Controller
   {
     private readonly IDepartmentService _departmentService;
+    private readonly IEmployeeService _employeeService;
 
-    public DepartmentController(IDepartmentService departmentService)
+    public DepartmentController(IDepartmentService departmentService, IEmployeeService employeeService)
     {
       _departmentService = departmentService;
+      _employeeService = employeeService;
     }
 
     public async Task<IActionResult> Index()
@@ -42,6 +44,19 @@ namespace EmployeeMgmt.Web.Controllers {
         ModelState.AddModelError("DepartmentName", ex.Message);
       }
       return View(department);
+    }
+
+
+    public async Task<IActionResult> ViewEmployees(int departmentId)
+    {
+      var department = await _departmentService.GetDepartmentByIdAsync(departmentId);
+      if (department == null)
+      {
+        return NotFound();
+      }
+      var employees = await _employeeService.GetEmployeesByDepartmentIdAsync(departmentId);
+      ViewBag.Department = department;
+      return View(employees);
     }
   }
 }

@@ -1,0 +1,43 @@
+@model IEnumerable<EmployeeMgmt.Domain.Entities.Employee>
+
+@{
+  ViewData["Title"] = "Employees in " + ViewBag.Department.DepartmentName;
+}
+
+<div class="w-full h-full flex flex-col">
+  <div class="flex flex-col gap-2 px-6 py-10 border-b">
+    <h1 class="text-3xl font-serif font-medium">Employees in @ViewBag.Department.DepartmentName</h1>
+    <p class="font-normal text-md text-neutral-400 font-sans tracking-tight px-1 text-balance">
+      Department Description: @ViewBag.Department.Description
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 w-full h-full border-b">
+    @if (Model.Any())
+    {
+      @foreach (var employee in Model)
+      {
+        <div class="border-b px-6 py-10 last:border-b-0 flex w-full items-center justify-between">
+          <div class="flex flex-col gap-1">
+            <h4 class="text-xl font-serif font-medium text-black tracking-tight">
+              @employee.Name
+            </h4>
+            <p class="text-md font-sans font-normal text-neutral-500 tracking-tight">
+              <span class="text-black font-mono">@employee.EmployeeCode</span>
+            </p>
+            <p class="text-md font-sans font-normal text-neutral-500 tracking-tight">
+              Email: <span class="text-black font-sans">@employee.Email</span>
+            </p>
+            <p class="text-md font-sans font-normal text-neutral-500 tracking-tight">
+              Hire Date: <span class="text-black font-sans">@employee.HireDate.ToString("dd/MM/yyyy")</span>
+            </p>
+          </div>
+        </div>
+      }
+    }
+    else
+    {
+      <p class="text-red-500">No employees found for this department.</p>
+    }
+  </div>
+</div>

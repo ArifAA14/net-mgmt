@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EmployeeMgmt.Web.styles.css" asp-append-version="true" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="w-full h-full md:max-w-[80%] mx-auto min-h-screen md:border-r md:border-l">
+    <header>
+        <nav class=" flex w-full items-center gap-0 justify-between border-b">
+            <a class="font-medium text-md text-black px-6" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+
+            <div class=" flex items-center gap-0">
+
+                <a class="font-normal text-md border-r border-l py-4 px-4 text-neutral-500 hover:text-black transition-all ease-linear duration-300"
+                    asp-controller="Home" asp-action="Index">Employees</a>
+
+
+                <a class="font-normal text-md border-r py-4 px-4 text-neutral-500 hover:text-black transition-all ease-linear duration-300"
+                    asp-area="" asp-controller="Home" asp-action="Index">Departments</a>
+
+
+                <a class="font-normal text-md text-neutral-500 px-6 hover:text-black transition-all ease-linear duration-300"
+                    asp-area="" asp-controller="Home" asp-action="Index">Search</a>
+
+
+            </div>
+        </nav>
+    </header>
+    <div class="w-full h-full ">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="w-full h-full flex flex-col ">
+    <div class="flex flex-col gap-2 px-6 py-10 border-b">
+    <h1 class="text-3xl font-serif font-medium">Welcome Back, Admin</h1>
+    <p class="font-normal text-md text-neutral-400 font-sans tracking-tight px-1 text-balance">
+        To begin, please use one of the quick links below to navigate the application
+    </p>
+    </div>
+
+    <div class="grid w-full h-full border-b  grid-cols-1">
+        <a href="@Url.Action("Index", "Employee")"
+            class="w-full h-full  border-b px-6 py-6 flex flex-col gap-2 hover:bg-neutral-100 transition-all ease-linear duration-300">
+            <h1 class="font-medium font-serif text-black text-xl">View Employees</h1>
+            <p class="font-normal font-sans text-neutral-400 tracking-tight text-sm">
+                View all your current registered employees and their information
+            </p>
+        </a>
+
+        <a href="@Url.Action("Index", "Department")"
+            class="w-full h-full  border-b px-6 py-6 flex flex-col gap-2 hover:bg-neutral-100 transition-all ease-linear duration-300">
+            <h1 class="font-medium font-serif text-black text-xl">View Departments</h1>
+            <p class="font-normal font-sans text-neutral-400 tracking-tight text-sm ">
+                View all your current registered departments and their information
+            </p>
+        </a>
+        <a href="@Url.Action("Create", "Employee")"
+            class="w-full h-full px-6 py-6 flex flex-col gap-2  border-b hover:bg-neutral-100 transition-all ease-linear duration-300">
+            <h1 class="font-medium font-serif text-black text-xl">Add Employee</h1>
+            <p class="font-normal font-sans text-neutral-400 tracking-tight text-sm">
+                Add a new employee and its information to your system
+            </p>
+        </a>
+
+        <a href="@Url.Action("Create", "Department")"
+            class="w-full h-full px-6 py-6 flex flex-col gap-2 hover:bg-neutral-100 transition-all ease-linear duration-300">
+            <h1 class="font-medium font-serif text-black text-xl">Add Department</h1>
+            <p class="font-normal font-sans text-neutral-400 tracking-tight text-sm">
+                Add a new department and its information to your system
+            </p>
+        </a>
+    </div>
+</div>

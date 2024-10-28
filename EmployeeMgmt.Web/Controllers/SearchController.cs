@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using EmployeeMgmt.Application.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using EmployeeMgmt.Domain.Entities;
 using EmployeeMgmt.Web.Models;
 
 
@@ -38,13 +37,10 @@ namespace EmployeeMgmt.Web.Controllers
       if (HireDate.HasValue)
       {
         var hireDateOnly = HireDate.Value.Date; // Extract just the date part (local date from the form)
-        Console.WriteLine($"Searching for employees hired on: {hireDateOnly}");
 
         foreach (var employee in employees)
         {
-          Console.WriteLine($"Employee: {employee.Name}, Hire Date in DB: {employee.HireDate}, Form Date: {hireDateOnly}");
 
-          // Compare only the year, month, and day, ignoring time zones and time components
           if (employee.HireDate.Year == hireDateOnly.Year &&
               employee.HireDate.Month == hireDateOnly.Month &&
               employee.HireDate.Day == hireDateOnly.Day)

@@ -39,9 +39,18 @@ namespace EmployeeMgmt.Web.Controllers
     {
       if (ModelState.IsValid)
       {
-        employee.HireDate = DateTime.SpecifyKind(employee.HireDate, DateTimeKind.Utc);
-        await _employeeService.AddEmployeeAsync(employee);
-        return RedirectToAction(nameof(Index));
+        try
+        {
+          employee.HireDate = DateTime.SpecifyKind(employee.HireDate, DateTimeKind.Utc);
+          await _employeeService.AddEmployeeAsync(employee);
+          return RedirectToAction(nameof(Index));
+        }
+        catch (Exception ex)
+        {
+          // Handle any other unexpected exceptions
+          ModelState.AddModelError("", "This Email already exists.");
+          Console.WriteLine(ex.Message); // Log the error
+        }
       }
 
       Console.WriteLine("Errors during validation -");
@@ -50,9 +59,11 @@ namespace EmployeeMgmt.Web.Controllers
         Console.WriteLine(error.ErrorMessage);
       }
 
+      // Reload the departments in case of an error
       ViewBag.Departments = new SelectList(await _departmentService.GetAllDepartmentsAsync(), "DepartmentId", "DepartmentName");
-      return View(employee);
+      return View(employee);  // Re-render the form with validation errors
     }
+
 
 
     // GET: Employee/Edit
@@ -91,7 +102,6 @@ namespace EmployeeMgmt.Web.Controllers
       {
         try
         {
-          // Preserve the EmployeeCode and other important fields
           employee.EmployeeCode = existingEmployee.EmployeeCode;
           employee.EmployeeId = existingEmployee.EmployeeId;
           employee.HireDate = DateTime.SpecifyKind(employee.HireDate, DateTimeKind.Utc);

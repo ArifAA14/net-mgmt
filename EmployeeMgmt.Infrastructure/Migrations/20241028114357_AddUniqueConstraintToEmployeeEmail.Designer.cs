@@ -3,6 +3,7 @@ using System;
 using EmployeeMgmt.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EmployeeMgmt.Infrastructure.Migrations
 {
     [DbContext(typeof(EmployeeMgmtDbContext))]
-    partial class EmployeeMgmtDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241028114357_AddUniqueConstraintToEmployeeEmail")]
+    partial class AddUniqueConstraintToEmployeeEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,9 +75,6 @@ namespace EmployeeMgmt.Infrastructure.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("EmployeeCode")
                         .IsUnique();
 
                     b.ToTable("Employees");

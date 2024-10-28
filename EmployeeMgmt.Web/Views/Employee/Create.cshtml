@@ -47,7 +47,7 @@
 
   @if (!ViewData.ModelState.IsValid)
   {
-    <div class="text-red-500">
+    <div class="text-red-500 px-6">
       <ul>
         @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
         {

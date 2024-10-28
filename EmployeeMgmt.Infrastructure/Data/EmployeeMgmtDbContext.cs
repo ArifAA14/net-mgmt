@@ -18,11 +18,21 @@ namespace EmployeeMgmt.Infrastructure.Data
 
     {
 
-      // One-to-Many relationship between Department and Employees
       modelBuilder.Entity<Employee>()
-          .HasOne(e => e.Department)  // Each Employee has one Department
-          .WithMany(d => d.Employees)  // Each Department has many Employees
-          .HasForeignKey(e => e.DepartmentId);  
+        .HasOne(e => e.Department)
+        .WithMany(d => d.Employees)
+        .HasForeignKey(e => e.DepartmentId);
+
+
+      modelBuilder.Entity<Employee>()
+        .HasIndex(e => e.Email)
+        .IsUnique();
+
+      modelBuilder.Entity<Employee>()
+        .HasIndex(e => e.EmployeeCode)
+        .IsUnique();
+
+      base.OnModelCreating(modelBuilder);
 
     }
   }

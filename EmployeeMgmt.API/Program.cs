@@ -1,7 +1,10 @@
+using System.Text;
 using EmployeeMgmt.Application.Services;
 using EmployeeMgmt.Infrastructure.Data;
 using EmployeeMgmt.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,10 +38,27 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "your-app-issuer",
+        ValidAudience = "your-app-audience",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ThisIsASecureKeyThatIsLongEnough12345"))
+    };
+});
 
 
 var app = builder.Build();
-app.MapControllers();
 
 
 // Configure the HTTP request pipeline.
@@ -49,6 +69,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication(); // Add this to enable JWT authentication
+app.UseAuthorization();  // Add this to enable authorization
+app.MapControllers();
+
 
 var summaries = new[]
 {

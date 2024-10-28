@@ -3,9 +3,11 @@ using EmployeeMgmt.Application.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using EmployeeMgmt.Domain.Entities;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmployeeMgmt.API.Controllers
 {
+  [Authorize]
   [ApiController]
   [Route("employee")]
   public class EmployeeController : ControllerBase

@@ -22,13 +22,11 @@ namespace EmployeeMgmt.Web.Controllers
       var employees = await _employeeService.GetAllEmployeesAsync();
       var departments = await _departmentService.GetAllDepartmentsAsync();
 
-      // Filter employees based on the search term
       if (!string.IsNullOrEmpty(searchTerm))
       {
         employees = employees.Where(e => e.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
       }
 
-      // Filter employees by department if a department is selected
       if (departmentId.HasValue && departmentId.Value > 0)
       {
         employees = employees.Where(e => e.DepartmentId == departmentId);
@@ -36,18 +34,7 @@ namespace EmployeeMgmt.Web.Controllers
 
       if (HireDate.HasValue)
       {
-        var hireDateOnly = HireDate.Value.Date; // Extract just the date part (local date from the form)
-
-        foreach (var employee in employees)
-        {
-
-          if (employee.HireDate.Year == hireDateOnly.Year &&
-              employee.HireDate.Month == hireDateOnly.Month &&
-              employee.HireDate.Day == hireDateOnly.Day)
-          {
-            Console.WriteLine($"Match found for employee: {employee.Name}");
-          }
-        }
+        var hireDateOnly = HireDate.Value.Date;
 
         employees = employees.Where(e =>
             e.HireDate.Year == hireDateOnly.Year &&

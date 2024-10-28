@@ -4,7 +4,7 @@ namespace EmployeeMgmt.Web.Models
   {
     public string SearchTerm { get; set; }
     public int? DepartmentId { get; set; }
-    public DateTime? HireDate { get; set; }  // Include HireDate for filtering
+    public DateTime? HireDate { get; set; }
     public IEnumerable<EmployeeMgmt.Domain.Entities.Employee> Employees { get; set; }
   }
 }

@@ -23,6 +23,11 @@ namespace EmployeeMgmt.Infrastructure.Repositories
       return await _context.Departments.FindAsync(departmentId);
     }
 
+    public async Task<Department> GetByNameAsync(string departmentName)
+    {
+      return await _context.Departments.FirstOrDefaultAsync(d => d.DepartmentName == departmentName);
+    }
+
     public async Task AddAsync(Department department)
     {
       await _context.Departments.AddAsync(department);

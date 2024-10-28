@@ -22,6 +22,11 @@ namespace EmployeeMgmt.Application.Services
       return await _departmentRepository.GetByIdAsync(departmentId);
     }
 
+    public async Task<Department> GetDepartmentByNameAsync(string departmentName)
+    {
+      return await _departmentRepository.GetByNameAsync(departmentName);
+    }
+
     public async Task AddDepartmentAsync(Department department)
     {
       var existingDepartments = await _departmentRepository.GetAllAsync();

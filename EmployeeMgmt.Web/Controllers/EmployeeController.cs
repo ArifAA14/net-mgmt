@@ -59,9 +59,8 @@ namespace EmployeeMgmt.Web.Controllers
         Console.WriteLine(error.ErrorMessage);
       }
 
-      // Reload the departments in case of an error
       ViewBag.Departments = new SelectList(await _departmentService.GetAllDepartmentsAsync(), "DepartmentId", "DepartmentName");
-      return View(employee);  // Re-render the form with validation errors
+      return View(employee);
     }
 
 
@@ -138,6 +137,5 @@ namespace EmployeeMgmt.Web.Controllers
       await _employeeService.DeleteEmployeeAsync(employeeId);
       return RedirectToAction(nameof(Index));
     }
-
   }
 }

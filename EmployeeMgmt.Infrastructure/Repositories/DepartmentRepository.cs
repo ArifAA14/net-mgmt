@@ -1,5 +1,5 @@
 using EmployeeMgmt.Domain.Entities;
-using EmployeeMgmt.Infrastructure.Data;  // To use the DbContext
+using EmployeeMgmt.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeMgmt.Infrastructure.Repositories
@@ -36,16 +36,14 @@ namespace EmployeeMgmt.Infrastructure.Repositories
 
     public async Task UpdateAsync(Department department)
     {
-      // Detach the existing entity if it's already being tracked
       var trackedEntity = _context.ChangeTracker.Entries<Department>()
           .FirstOrDefault(e => e.Entity.DepartmentId == department.DepartmentId);
 
       if (trackedEntity != null)
       {
-        trackedEntity.State = EntityState.Detached; // Detach the tracked entity
+        trackedEntity.State = EntityState.Detached;
       }
 
-      // Now attach and update the new entity
       _context.Departments.Attach(department);
       _context.Entry(department).State = EntityState.Modified;
       await _context.SaveChangesAsync();

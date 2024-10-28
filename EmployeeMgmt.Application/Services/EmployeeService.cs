@@ -33,7 +33,7 @@ namespace EmployeeMgmt.Application.Services
     private async Task<string> GenerateEmployeeCodeAsync()
     {
       var employees = await _employeeRepository.GetAllAsync();
-      int nextNumber = employees.Count() + 1;  // Increment based on existing employees
+      int nextNumber = employees.Count() + 1;
 
       return $"EMP{nextNumber:D3}";  
     }

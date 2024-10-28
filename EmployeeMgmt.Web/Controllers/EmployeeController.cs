@@ -20,7 +20,7 @@ namespace EmployeeMgmt.Web.Controllers
 
     public async Task<IActionResult> Index()
     {
-      var employees = await _employeeService.GetAllEmployeesAsync(); // Fetch all employees from app layer
+      var employees = await _employeeService.GetAllEmployeesAsync();
       return View(employees);  
     }
 

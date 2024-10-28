@@ -25,21 +25,40 @@ namespace EmployeeMgmt.API.Controllers
 
     // GET: /employee
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetAllEmployees()
+    public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetAllEmployees(int page = 1, int pageSize = 10)
     {
       var employees = await _employeeService.GetAllEmployeesAsync();
-      var employeeDTOs = employees.Select(e => new EmployeeDTO
+
+      var paginatedEmployees = employees
+          .Skip((page - 1) * pageSize)
+          .Take(pageSize)
+          .ToList();
+
+      var employeeDTOs = paginatedEmployees.Select(e => new EmployeeDTO
       {
         EmployeeId = e.EmployeeId,
         EmployeeCode = e.EmployeeCode,
         Name = e.Name,
         Email = e.Email,
-        Department = e.Department.DepartmentName,
+        Department = e.Department?.DepartmentName,
         HireDate = e.HireDate
       }).ToList();
 
+
+      var totalEmployees = employees.Count();
+      var metadata = new
+      {
+        TotalItems = totalEmployees,
+        PageSize = pageSize,
+        CurrentPage = page,
+        TotalPages = (int)Math.Ceiling(totalEmployees / (double)pageSize)
+      };
+
+      Response.Headers.Append("X-Pagination", System.Text.Json.JsonSerializer.Serialize(metadata));
+
       return Ok(employeeDTOs);
     }
+
 
     // POST /employee for creating a new employee
     [HttpPost]
@@ -50,7 +69,7 @@ namespace EmployeeMgmt.API.Controllers
         return BadRequest(ModelState);
       }
 
-      var department = await _departmentService.GetDepartmentByNameAsync(employeeDto.Department);
+      var department = await _departmentService.GetDepartmentByNameAsync(employeeDto?.Department);
       if (department == null)
       {
         return BadRequest("Invalid department specified.");

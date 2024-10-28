@@ -2,7 +2,6 @@ using EmployeeMgmt.Application.Services;
 using EmployeeMgmt.Application.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using EmployeeMgmt.Domain.Entities;
-using Microsoft.Extensions.Logging;
 
 
 namespace EmployeeMgmt.API.Controllers

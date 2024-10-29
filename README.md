@@ -23,9 +23,7 @@ This Employee Management System is a web application with both API and UI compon
 
 ## Prerequisites
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/)
-- [PostgreSQL](https://www.postgresql.org/download/) (or a different database if configured)
-- [Redis (optional)](https://redis.io/download) - if caching is enabled
-- [Node.js & npm](https://nodejs.org/en/download/) (if any frontend tooling is used)
+- [PostgreSQL](https://www.postgresql.org/download/)
 
 ## Setup Instructions
 

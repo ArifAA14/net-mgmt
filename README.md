@@ -29,7 +29,7 @@ This Employee Management System is a web application with both API and UI compon
 
 ### Step 1: Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/ArifAA14/net-mgmt
 cd EmployeeMgmt
 ```
 
@@ -38,9 +38,14 @@ cd EmployeeMgmt
 dotnet restore
 ```
 
+### Step 3: Initiliaze PostgreSQL Database
+```sql
+CREATE DATABASE employeemgmt;
+```
 
-### Step 3: Configure DB Connection String
-- Open the appsettings.json file in EmployeeMgmt.Web 
+
+### Step 4: Configure DB Connection String
+- Open the appsettings.json file in EmployeeMgmt.Web & EmployeeMgmt.API
 - Replace the DefaultConnection string with your PostgreSQL connection string
 - For example, if your PostgreSQL server is running on localhost and the database name is employeemgmt, the connection string would be:
 
@@ -49,11 +54,9 @@ dotnet restore
     "DefaultConnection": "Host=localhost;Database=employeemgmt;Username=your_username;Password=your_password"
   },
 ```
-- Similarly, replace the DefaultConnection string in EmployeeMgmt.API/appsettings.json
 
 
-
-### Step 4: Run DB Migrations
+### Step 5: Run DB Migrations
 ```bash
 cd EmployeeMgmt.Infrastructure
 dotnet ef migrations add InitialCreate

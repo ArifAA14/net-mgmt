@@ -42,24 +42,25 @@ dotnet restore
 
 
 ### Step 3: Configure DB Connection String
-# Open the appsettings.json file in EmployeeMgmt.Web 
-# Replace the DefaultConnection string with your PostgreSQL connection string
-# For example, if your PostgreSQL server is running on localhost and the database name is employeemgmt, the connection string would be:
+- Open the appsettings.json file in EmployeeMgmt.Web 
+- Replace the DefaultConnection string with your PostgreSQL connection string
+- For example, if your PostgreSQL server is running on localhost and the database name is employeemgmt, the connection string would be:
 ```json
 "ConnectionStrings": {
     "DefaultConnection": "Host=localhost;Database=employeemgmt;Username=your_username;Password=your_password"
   },
 ```
-# Similarly, replace the DefaultConnection string in EmployeeMgmt.API/appsettings.json
+- Similarly, replace the DefaultConnection string in EmployeeMgmt.API/appsettings.json
 
 
 
 ### Step 3: Run DB Migrations
+```bash
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-## Running the Application
+### Running the Application
 
 To run the web application, navigate to the EmployeeMgmt.Web directory and run the following command:
 
@@ -72,9 +73,6 @@ To Run the API, navigate to the EmployeeMgmt.API directory and run the following
 ```bash
 dotnet run
 ```
-
-## License
-This project is licensed under the MIT License.
 
 
 

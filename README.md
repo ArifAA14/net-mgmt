@@ -33,19 +33,23 @@ This Employee Management System is a web application with both API and UI compon
 ```bash
 git clone <repository-url>
 cd EmployeeMgmt
+```
 
 ### Step 2: Install Dependencies
+```bash
 dotnet restore
+```
 
 
 ### Step 3: Configure DB Connection String
 # Open the appsettings.json file in EmployeeMgmt.Web 
 # Replace the DefaultConnection string with your PostgreSQL connection string
 # For example, if your PostgreSQL server is running on localhost and the database name is employeemgmt, the connection string would be:
+```json
 "ConnectionStrings": {
     "DefaultConnection": "Host=localhost;Database=employeemgmt;Username=your_username;Password=your_password"
   },
-
+```
 # Similarly, replace the DefaultConnection string in EmployeeMgmt.API/appsettings.json
 
 

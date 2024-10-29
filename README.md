@@ -45,6 +45,7 @@ dotnet restore
 - Open the appsettings.json file in EmployeeMgmt.Web 
 - Replace the DefaultConnection string with your PostgreSQL connection string
 - For example, if your PostgreSQL server is running on localhost and the database name is employeemgmt, the connection string would be:
+
 ```json
 "ConnectionStrings": {
     "DefaultConnection": "Host=localhost;Database=employeemgmt;Username=your_username;Password=your_password"
@@ -54,8 +55,9 @@ dotnet restore
 
 
 
-### Step 3: Run DB Migrations
+### Step 4: Run DB Migrations
 ```bash
+cd EmployeeMgmt.Infrastructure
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```

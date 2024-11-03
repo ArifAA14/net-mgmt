@@ -28,29 +28,27 @@ public class NotificationService : INotificationService
 
   private void SendEmail(string subject, string body)
   {
-    using (var client = new SmtpClient(_smtpHost, _smptPort))
+    using var client = new SmtpClient(_smtpHost, _smptPort);
+    client.Credentials = new NetworkCredential(_fromEmail, _fromEmailPassword);
+    client.EnableSsl = true;
+
+    var mailMessage = new MailMessage
     {
-      client.Credentials = new NetworkCredential(_fromEmail, _fromEmailPassword);
-      client.EnableSsl = true;
+      From = new MailAddress(_fromEmail),
+      Subject = subject,
+      Body = body,
+      IsBodyHtml = false,
+    };
+    mailMessage.To.Add("aarif14@hotmail.com"); // replace with your recipient email address
 
-      var mailMessage = new MailMessage
-      {
-        From = new MailAddress(_fromEmail),
-        Subject = subject,
-        Body = body,
-        IsBodyHtml = false,
-      };
-      mailMessage.To.Add("aarif14@hotmail.com"); // replace with your recipient email address
-
-      try
-      {
-        client.Send(mailMessage);
-        Console.WriteLine("Email sent successfully.");
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine($"Error sending email: {ex.Message}");
-      }
+    try
+    {
+      client.Send(mailMessage);
+      Console.WriteLine("Email sent successfully.");
+    }
+    catch (Exception ex)
+    {
+      Console.WriteLine($"Error sending email: {ex.Message}");
     }
   }
 }

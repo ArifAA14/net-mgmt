@@ -15,6 +15,8 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
+builder.Services.AddSingleton<INotificationService, NotificationService>();
+
 
 // Add DbContext for PostgreSQL
 builder.Services.AddDbContext<EmployeeMgmtDbContext>(options =>

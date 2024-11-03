@@ -6,10 +6,12 @@ namespace EmployeeMgmt.Application.Services
   public class EmployeeService : IEmployeeService
   {
     private readonly IEmployeeRepository _employeeRepository;
+    private readonly INotificationService _notificationService;
 
-    public EmployeeService(IEmployeeRepository employeeRepository)
+    public EmployeeService(IEmployeeRepository employeeRepository, INotificationService notificationService)
     {
       _employeeRepository = employeeRepository;
+      _notificationService = notificationService;
     }
 
     public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
@@ -26,16 +28,16 @@ namespace EmployeeMgmt.Application.Services
 
     public async Task AddEmployeeAsync(Employee employee)
     {
-      employee.EmployeeCode = await GenerateEmployeeCodeAsync();
+      employee.EmployeeCode = GenerateEmployeeCode();
       await _employeeRepository.AddAsync(employee);
+      _notificationService.SendNotification($"Employee {employee.Name} added successfully.");
     }
 
-    private async Task<string> GenerateEmployeeCodeAsync()
+    private static string GenerateEmployeeCode()
     {
-      var employees = await _employeeRepository.GetAllAsync();
-      int nextNumber = employees.Count() + 1;
-
-      return $"EMP{nextNumber:D3}";  
+      Random random = new Random();
+      int randomNumber = random.Next(1000, 9999);
+      return $"EMP{randomNumber:D3}";
     }
 
     public async Task UpdateEmployeeAsync(Employee employee)
